@@ -160,6 +160,8 @@ public:
         // if the value on the left is not null, then we re run the function again using recursion
         return findMin(root->left);
     }
+
+     
 };
 
 int main()
