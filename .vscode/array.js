@@ -54,3 +54,28 @@ const convertToCamalCase = (s) => {
 
 const text = "this__is___a_test";
 console.log(convertToCamalCase(text));
+
+/////////////////////////////////////
+
+
+const reverseString = (s) => {
+  const charSArray = [];
+  let revString = "";
+
+  // push each character into array
+  for (let c of s) {
+    charSArray.push(c);
+  }
+
+  // pop characters off in reverse
+  while (charSArray.length > 0) {
+    // in c++ we can use .back()
+    revString += charSArray[charSArray.length - 1];
+    charSArray.pop();
+  }
+
+  return revString;
+};
+
+const string = "hello world";
+console.log(reverseString(string)); // "dlrow olleh"

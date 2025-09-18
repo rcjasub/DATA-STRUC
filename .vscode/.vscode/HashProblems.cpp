@@ -24,7 +24,9 @@ class HashProblems
 
         return {};
 
-        }  
+        }
+        
+        ////////////////////////////////////////////////////////////////////////
 
         std::vector<char>  firstNonReapetingChar(std::string str)
       {

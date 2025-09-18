@@ -22,6 +22,7 @@ bool FindCommon(vector<int> arr1, vector<int> arr2)
     return false;
 }
 
+/////////////////////////////////////////////////
 //O(n)
 bool FindCommonHash(vector<int> arr1, vector<int> arr2)
 {
@@ -39,6 +40,8 @@ bool FindCommonHash(vector<int> arr1, vector<int> arr2)
 
    return false;
 }
+
+/////////////////////////////////////
 
 vector<int> FindDuplicates(vector<int> arr1)
 {

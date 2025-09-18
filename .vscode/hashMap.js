@@ -16,6 +16,9 @@ const firstElAppearsMoreThanOnce = (s) => {
 
 console.log(firstElAppearsMoreThanOnce([2, 5, 1, 2, 3, 5])); // Output: 2
 
+/////////////////////////////////////////////////////
+
+// set 
 const lengthOfLongestSubstring = (s) => {
   let set = new Set();
   let left = 0;
@@ -36,4 +39,4 @@ const lengthOfLongestSubstring = (s) => {
 };
 
 let s = "abca";
-console.log(lengthOfLongestSubstring(s));
+console.log(lengthOfLongestSubstring(s)); //bca
