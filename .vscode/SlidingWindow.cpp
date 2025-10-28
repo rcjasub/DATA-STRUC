@@ -31,22 +31,45 @@ int FindMaxNum(vector<int> &nums, int k)
 
 int minSubarrayLen(vector<int> &nums, int target)
 {
-//    int n = nums.size();
-//     int left = 0, sum = 0;
-//     int minLen = INT_MAX;
+    //    int n = nums.size();
+    //     int left = 0, sum = 0;
+    //     int minLen = INT_MAX;
 
-//     for (int right = 0; right < n; right++) {
-//         sum += nums[right]; // expand window
+    //     for (int right = 0; right < n; right++) {
+    //         sum += nums[right]; // expand window
 
-//         // shrink while sum >= target
-//         while (sum >= target) {
-//             minLen = min(minLen, right - left + 1);
-//             sum -= nums[left];
-//             left++;
-//         }
-//     }
+    //         // shrink while sum >= target
+    //         while (sum >= target) {
+    //             minLen = min(minLen, right - left + 1);
+    //             sum -= nums[left];
+    //             left++;
+    //         }
+    //     }
 
-//     return (minLen == INT_MAX ? 0 : minLen);
+    //     return (minLen == INT_MAX ? 0 : minLen);
+}
+
+int LonIncreasingSubarr(vector<int> &nums)
+{
+    int size = nums.size();
+    int maxLength = 1;
+    int length = 1;
+
+    for (int right = 1; right < size; right++)
+    {
+        if (nums[right] > nums[right - 1])
+        {
+            length++;
+        }
+        else
+        {
+            length = 1;
+        }
+
+        maxLength = max(maxLength, length);
+    }
+
+    return maxLength;
 }
 
 int main()

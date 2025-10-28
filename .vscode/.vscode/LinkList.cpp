@@ -547,6 +547,27 @@ public:
     }
 };
 
+Node *deleteMiddle(Node *head)
+{
+    Node *fast = head;
+    Node *slow = head;
+    Node *prev = nullptr;
+
+    if (head == nullptr || head->next == nullptr)
+        return nullptr;
+
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        prev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    prev->next = slow->next;
+    delete slow;
+    return head;
+}
+
 int main()
 {
     LinkedList list1(1);
@@ -559,7 +580,6 @@ int main()
     list2.append(2);
     list2.append(3);
     list2.append(5);
-    list2.append(6);
 
     cout << "List 1: ";
     list1.printList();
@@ -570,6 +590,16 @@ int main()
 
     cout << "Merged List: ";
     Node *temp = mergedHead;
+    while (temp)
+    {
+        cout << temp->value << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+
+    mergedHead = deleteMiddle(mergedHead); // update head
+    cout << "After deleting middle: ";
+    temp = mergedHead; // reset temp
     while (temp)
     {
         cout << temp->value << " ";

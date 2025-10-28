@@ -54,6 +54,9 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "unordered_map": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_set": "cpp"
     }
 }

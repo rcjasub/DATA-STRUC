@@ -57,7 +57,6 @@ console.log(convertToCamalCase(text));
 
 /////////////////////////////////////
 
-
 const reverseString = (s) => {
   const charSArray = [];
   let revString = "";
@@ -77,5 +76,37 @@ const reverseString = (s) => {
   return revString;
 };
 
+const findMaxinArr = (arr) => {
+  let max = [0];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
+};
+
+const countForVowelsAndConsonants = (s) => {
+  let vowels = 0;
+  let consonats = 0;
+
+  for (let c of s) {
+    c = c.toLowerCase(c);
+    if (c >= "a" && c <= "z") {
+      if (c == "a" || c == "e" || c == "i" || c == "o" || c == "u") vowels++;
+      else consonats++;
+    }
+  }
+
+  console.log("V", vowels);
+  console.log("C", consonats);
+};
+
+const arr = [1, 3, 2, 4];
+console.log(findMaxinArr(arr));
+
 const string = "hello world";
 console.log(reverseString(string)); // "dlrow olleh"
+
+console.log(countForVowelsAndConsonants(string));
