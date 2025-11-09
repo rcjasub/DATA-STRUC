@@ -1,5 +1,6 @@
 #include<iostream>
 #include<climits>  // For INT_MIN
+#include <stack>
 
 using namespace std;
 
@@ -140,6 +141,45 @@ public:
    }
 
     
+};
+
+class Solution {
+public:
+
+    bool isVowel(char c) {
+    c = tolower(c);          // convert to lowercase
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+
+    string reverseVowels(string s) {
+        // I want try this method. using stack because when we pop it comes in reverse
+        // Create a function to check if it is a vowel
+        // if it is push it to the stack
+        // loop again to exchange vowels, with the stack (top)
+
+        stack<char> Vowels;
+
+        for(char x : s)
+        {
+           if(isVowel(x))
+           {
+              Vowels.push(x);
+           }
+
+        }
+
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(isVowel(s[i]))
+            {
+                s[i] = Vowels.top();
+                Vowels.pop();
+            }
+        }
+
+        return s;
+
+    }
 };
 
 int main() {
