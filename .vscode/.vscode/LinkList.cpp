@@ -297,6 +297,29 @@ public:
         return false;
     }
 
+    void swapPairs() {
+           
+            
+            Node* dummy = new Node(0);
+            dummy->next = head;
+            Node* prev = dummy;
+            
+            while(prev->next != nullptr && prev->next->next != nullptr)
+            {
+                Node* first = prev->next;
+                Node* second = first->next;
+                
+                first->next = second->next;
+                second->next = first;
+                prev->next = second;
+                prev = first;
+               
+            }
+            
+            head = dummy->next;
+            delete dummy;
+        }
+
     Node *findKthFromEnd(int k)
     {
         if (head == nullptr || k <= 0)
