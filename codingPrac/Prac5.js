@@ -12,7 +12,7 @@ var fetchListings = async function() {
 
 // Bug 1: Should return only active listings
 var getActiveListings = async function() {
-    const listings = fetchListings();
+    const listings =  await fetchListings();
     return listings.filter(item => item.active === true);
 };
 
@@ -26,13 +26,16 @@ var getAllTags = function(listings) {
 var getAveragePrice = function(listings) {
     const active = listings.filter(item => item.active === true);
     const total = active.reduce((sum, item) => sum + item.price, 0);
-    return total / listings.length;
+    return total / active.length;
 };
 
 // TODO: takes listings and a tag (string) 
 // returns all active listings that include that tag, sorted by price low to high
-var getListingsByTag = function(listings, tag) {
-    // your code here
+var getListingsByTag = function(listings, tag) {                   // we not using === because tags is an array, so include works here to check if it exits
+    const items = listings.filter(item => item.active === true && item.tags.includes(tag));
+    //sorts by accending order
+    items.sort((a, b) => a.price - b.price);
+    return items;
 };
 
 var main = async function() {
