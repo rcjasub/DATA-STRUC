@@ -66,4 +66,29 @@ app.get('/users/stats', (req, res) => {
     res.json(stats);
 });
 
+const EventEmitter = require('events');
+const api = require('./mock-api');
+
+class Search extends EventEmitter {
+  async searchCount(searchTerm) {
+    if (searchTerm === undefined) {
+      this.emit('SEARCH_ERROR', { message: 'INVALID_TERM' });
+      return;
+    }
+
+    this.emit('SEARCH_STARTED', searchTerm);
+
+    try {
+      const count = await api.countMatches(searchTerm);
+      this.emit('SEARCH_SUCCESS', { count: count, term: searchTerm });
+    } catch (err) {
+      this.emit('SEARCH_ERROR', { message: err.message, term: searchTerm });
+    }
+  }
+}
+
+module.exports = Search;
+
+
+
 app.listen(3000, () => console.log('Server running on port 3000')); 
