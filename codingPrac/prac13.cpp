@@ -379,6 +379,110 @@ string compressLog(string s) {
      return (res.length() <= s.length()) ? res : s;
 }
 
+int regionSum(vector<vector<int>>& grid, int r1, int c1, int r2, int c2) {
+    int sum = 0;
+
+    for (int i = r1; i <= r2; i++) {
+        for (int j = c1; j <= c2; j++) {
+            sum += grid[i][j];
+        }
+    }
+
+    return sum;
+} 
+
+class NumArray {
+private:
+    vector<int> prefix;
+
+public:
+    NumArray(vector<int>& nums) {
+        prefix.resize(nums.size() + 1, 0);   // padding: prefix[0] = 0
+
+        for (int i = 0; i < nums.size(); i++) {
+            prefix[i + 1] = prefix[i] + nums[i];
+        }
+    }
+
+    int sumRange(int left, int right) {
+        return prefix[right + 1] - prefix[left];
+    }
+};
+
+class NumMatrix {
+private:
+    vector<vector<int>> prefix;
+
+public:
+    NumMatrix(vector<vector<int>>& matrix) {
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+
+        prefix.assign(rows + 1, vector<int>(cols + 1, 0));
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                prefix[i + 1][j + 1] = matrix[i][j]
+                                      + prefix[i][j + 1]      // above
+                                      + prefix[i + 1][j]       // left
+                                      - prefix[i][j];          // corner (avoid double count)
+            }
+        }
+    }
+
+    int sumRegion(int row1, int col1, int row2, int col2) {
+        return prefix[row2 + 1][col2 + 1]
+             - prefix[row1][col2 + 1]      // remove above
+             - prefix[row2 + 1][col1]      // remove left
+             + prefix[row1][col1];         // add back double-removed corner
+    }
+};
+
+vector<int> jobOrder(int n, vector<vector<int>>& deps) {
+    unordered_map<int, vector<int>> graph;
+    vector<int> inDegree(n, 0);
+
+    for(auto& i : deps){
+        int a = i[0];
+        int b = i[1];
+
+        graph[a].push_back(b);
+        inDegree[b]++;
+    }
+
+
+    queue<int> q;
+
+    for(int i = 0; i < n; i++)
+    {
+        if(inDegree[i] == 0)
+        {
+            q.push(i);
+        }
+    }
+
+    vector<int> res;
+
+    while(!q.empty()){
+        int curr = q.front();
+        q.pop();
+        res.push_back(curr);
+
+        for(int next : graph[curr])
+        {
+            inDegree[next]--;
+            if(inDegree[next] == 0)
+            {
+                q.push(next);
+            }
+        }
+    }
+
+    if ((int)res.size() != n) return {};
+    return res;
+}
+
+
 int main()
 {
     vector<int> a{1, 2, 3, 4};
